@@ -1,13 +1,18 @@
 package com.jojech.root;
 
 
-import com.sun.jdi.ArrayReference;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.jojech.root.FactionsGenerator.trimByExpansion;
 
+/*
+Class: DetermineFactions
+Purpose: this program facilitates automated ADSet faction drafting and selection for tournament play.
+User Inputs: # of Players, Expansions on hand, and (eventually) each player's faction selection.
+Outputs: Viable faction setups, and available options for player selection.
+ */
 public class DetermineFactions {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -39,18 +44,10 @@ public class DetermineFactions {
         if (cInput == 'y') marauders = true;
 
         Faction[] list = trimByExpansion(fList,riverfolk,underworld,marauders);
-        // Print Available Factions
-        /*
-        System.out.print("Your faction pool is:\n");
-        for (Faction y:
-             list) {
-            System.out.println(y.getFactionName());
-        }
-        */
 
         // Create Player List
         Player[] pList = createPlayerList(true, input);
-        for (Player b : pList) System.out.println(b.getPlayerName());
+        // for (Player b : pList) System.out.println(b.getPlayerName());
 
 
         // Follow ADSet Rules
@@ -62,7 +59,7 @@ public class DetermineFactions {
             ArrayList<Faction> factionDraft = new ArrayList<>();
             Faction[] ads = createADSetPool(input,list);
             for (Faction z : ads) {
-                System.out.print("\n"+z.getFactionName()+" - "+z.getReach());
+                // System.out.print("\n"+z.getFactionName()+" - "+z.getReach());
                 factionDraft.add(z);
             }
 
@@ -82,45 +79,7 @@ public class DetermineFactions {
             for (int i = pList.length-1; i >= 0; i--) {
                 System.out.print("\n"+pList[i].getPlayerName()+" as the "+pList[i].getPlaying().getNickname());
             }
-
-            /*
-            int sumReach = 0;
-            System.out.println("\n\n\nThe randomly generated faction pool: (" + reachFinder(input) + ")");
-            Faction[] sList = randomFactionPickerByReach(input,List);
-            for (Faction z :
-                    sList) {
-                sumReach += z.getReach();
-                System.out.print(z.getFactionName() + " - " + z.getReach() + "\n");
-            }
-            System.out.println("The reach for the factions provided (" + sumReach + ")");
-
-             */
         }
-    }
-
-    public static Faction[] randomFactionPickerByReach(int noPlayers, ArrayList<Faction> List) {
-        Faction[] result = new Faction[noPlayers];
-        ArrayList<Faction> store = new ArrayList<>();
-        store.addAll(List);
-
-        // Determine Reach
-        int reach = reachFinder(noPlayers);
-        int reachLeft = reach;
-
-
-        int noV = 0;
-        for (int i = 0; i < noPlayers; i++) {
-            int finalReachLeft = reachLeft;
-            if (i == noPlayers - 1) List.removeIf(n -> (n.getReach() < finalReachLeft));
-            result[i] = randomFaction(List);
-            if (result[i].getFactionName() == "Vagabond") noV++;
-            if (noV == 2 && result[i].getFactionName() == "Vagabond") {
-                result[i].setReach(2);
-            }
-            reachLeft -= result[i].getReach();
-            List.remove(result[i]);
-        }
-        return result;
     }
 
     public static Player[] createPlayerList(boolean auto, int input) {
