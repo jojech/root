@@ -1,4 +1,4 @@
-package com.jojech;
+package com.jojech.oryx;
 
 
 // Configuration Class

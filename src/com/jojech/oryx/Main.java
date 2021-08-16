@@ -1,4 +1,4 @@
-package com.jojech;
+package com.jojech.oryx;
 
 import java.lang.String;
 import java.lang.Math;

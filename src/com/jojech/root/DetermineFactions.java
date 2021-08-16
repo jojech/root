@@ -12,7 +12,7 @@ Class: DetermineFactions
 Purpose: this program facilitates automated ADSet faction drafting and selection for tournament play.
 User Inputs: # of Players, Expansions on hand, and (eventually) each player's faction selection.
 Outputs: Viable faction setups, and available options for player selection.
- */
+*/
 public class DetermineFactions {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -105,14 +105,6 @@ public class DetermineFactions {
         return pList;
     }
 
-    public static Faction randomFaction(Faction[] List) {
-        return List[(int)Math.floor(Math.random()*List.length)];
-    }
-
-    public static Faction randomFaction(ArrayList<Faction> List) {
-        return List.get((int)Math.floor(Math.random()*List.size()));
-    }
-
     public static int randomIndex(int length) {
         return (int)Math.floor(Math.random()*length);
     }
@@ -121,12 +113,6 @@ public class DetermineFactions {
         int rint;
         do rint = randomIndex(List.length); while (!List[rint].isRed());
         return rint;
-    }
-
-    public static Faction randomRedFaction(Faction[] List) {
-        Faction result = new Faction(false,0,"Null","null",0);
-        if (!result.isRed()) result = randomFaction(List);
-        return result;
     }
 
     public static Faction[] createADSetPool(int noPlayers, Faction[] List) {
