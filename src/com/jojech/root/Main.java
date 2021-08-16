@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 
 public class Main {
+    /*
+    Method: main()
+    Purpose: Initiates setup for a game of Root. Most notably, randomizes faction options to create variable game setups.
+     */
     public static void main(String[] args) {
         char cInput = 's';
         Scanner scan = new Scanner(System.in);
@@ -39,6 +43,7 @@ public class Main {
         System.out.println("Exiting the program...");
     }
 
+    // This method handles the drafting of factions for players to set up a game
     public static Game adSetDraftFactions(Configuration expansions,Group players) {
         // Initiate ADSET Drafting of factions.
         Faction[] list = trimByExpansion(createFactions()
@@ -77,16 +82,21 @@ public class Main {
         return new Game(expansions,players.getNoPlayers(),pList);
     }
 
+    // Method returns a random number within an array length.
+    // Purpose: to pick a random faction within the faction list.
     public static int randomIndex(int length) {
         return (int)Math.floor(Math.random()*length);
     }
 
+    // Method returns the index of a red faction within a list of factions
     public static int randomRedIndex(Faction[] List) {
         int rint;
         do rint = randomIndex(List.length); while (!List[rint].isRed());
         return rint;
     }
 
+    // Method returns a list of random factions based on the player count
+    // Purpose: to create a unique game experience every time players sit at the table.
     public static Faction[] createADSetPool(int noPlayers, Faction[] List) {
         Faction[] result = new Faction[noPlayers + 1];
         ArrayList<Faction> list = new ArrayList<>();
@@ -102,6 +112,8 @@ public class Main {
         return result;
     }
 
+    // Method gathers user input on which expansions the group is playing with
+    // Purpose: to filter which factions are available to play with.
     public static Configuration updateExpansions() {
         // Determine expansion(s) owned by group
         Scanner scan = new Scanner(System.in);
@@ -129,6 +141,8 @@ public class Main {
         return settings;
     }
 
+    // Method gathers user input to determine number of players and their names
+    // Purpose: to help in the drafting of factions.
     public static Group updatePlayers() {
         Scanner scan = new Scanner(System.in);
         int noPlayers;
@@ -151,6 +165,7 @@ public class Main {
         return players;
     }
 
+    // Determines how to name players and returns a list of user-entered names
     public static Player[] createPlayerList(boolean auto, int input) {
         // Create Players
         Player[] pList = new Player[input];
