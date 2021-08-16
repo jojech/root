@@ -1,8 +1,5 @@
 package com.jojech.root;
 
-import com.jojech.root.Faction;
-import com.jojech.root.Player;
-
 /*
 Idea: a campaign version of root where the winner of a game gets perks
 Possible consequences of winning:
@@ -11,10 +8,13 @@ Possible consequences of winning:
  - Start with a hireling at the beginning of the game
 */
 public class Game {
-    private int noPlayers;
-    private Player[] playerList;
-    private Faction[] factionList;
+    private Configuration expansions;
+    private Group players;
 
+    public Game(Configuration expansions, int noPlayers, Player[] pList) {
+        this.expansions = expansions;
+        this.players = new Group(noPlayers,pList);
+    }
 }
 
 /*
