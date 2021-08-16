@@ -34,6 +34,7 @@ public class Main {
                 case 'd' -> settings = adSetDraftFactions(expansions,players);
                 case 'e' -> expansions = updateExpansions();
                 case 'p' -> players = updatePlayers();
+                case 'x' -> System.out.print("Thank you for playing! ");
                 default -> System.out.println("Invalid input...");
             }
         } while (cInput != 'x');
