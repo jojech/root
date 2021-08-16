@@ -1,6 +1,5 @@
 package com.jojech.root;
 
-import static com.jojech.root.FactionsGenerator.createFactions;
 
 public class Configuration {
     private boolean riverfolk;

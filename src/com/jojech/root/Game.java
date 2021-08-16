@@ -15,6 +15,11 @@ public class Game {
         this.expansions = expansions;
         this.players = new Group(noPlayers,pList);
     }
+
+    public Game(Configuration expansions, Group players) {
+        this.expansions = expansions;
+        this.players = players;
+    }
 }
 
 /*
