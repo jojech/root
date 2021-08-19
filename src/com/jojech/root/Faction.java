@@ -13,6 +13,7 @@ public class Faction {
     // 2 = Underworld
     // 3 = Marauders
     private int box;
+    private boolean vb;
 
 
     public Faction(boolean red, int reach, String factionName, String nickname, int box) {
@@ -21,6 +22,16 @@ public class Faction {
         this.factionName = factionName;
         this.nickname = nickname;
         this.box = box;
+        this.vb = false;
+    }
+
+    public Faction(boolean red, int reach, String factionName, String nickname, int box, boolean vb) {
+        this.red = red;
+        this.reach = reach;
+        this.factionName = factionName;
+        this.nickname = nickname;
+        this.box = box;
+        this.vb = vb;
     }
 
     public boolean isRed() {
@@ -61,6 +72,14 @@ public class Faction {
 
     public void setBox(int box) {
         this.box = box;
+    }
+
+    public boolean isVb() {
+        return vb;
+    }
+
+    public void setVb(boolean vb) {
+        this.vb = vb;
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Main {
         do {
             // Put interface within these brackets
             // Initiate interface
-            System.out.println("\n============== Menu ==============" +
+            System.out.println("\n================ Menu ================" +
                     "\nSelect an option from the list below:" +
                     "\nDraft factions using ADSet rules (d)" +
                     "\nChange Expansion settings (e)" +
@@ -49,8 +49,10 @@ public class Main {
         Faction[] list = trimByExpansion(createFactions()
                 ,expansions.isRiverfolk()
                 ,expansions.isUnderworld()
-                ,expansions.isMarauders());
+                ,expansions.isMarauders()
+                ,expansions.isVagabond());
         Player[] pList = players.getPlayers();
+        Vagabond[] vList = createVagabondList(expansions);
         if (players.getNoPlayers() > list.length) System.out.print("Not enough factions...");
         else {
             // System.out.print("ADS Pool: ");
@@ -70,14 +72,32 @@ public class Main {
                 input = scan.nextInt();
                 pList[i].setPlaying(factionDraft.get(input));
                 factionDraft.remove(input);
-                System.out.print("\nCongratulations, you successfully selected the "+pList[i].getPlaying().getNickname()
-                        +"\nSetup your faction now.\n\n");
+                // Check if the selected faction is the vagabond. If so, assign a vagabond character.
+                if (pList[i].getPlaying().isVb()) {
+                    // Assign Vagabond character
+                    pList[i].getPlaying().setNickname(vList[randomIndex(vList.length)].getVbName());
+                    // Notify player of vagabond character selection
+                    System.out.print("\nCongratulations, you successfully selected the vagabond."+
+                            "\nYour vagabond character is the "+pList[i].getPlaying().getNickname()+
+                            "\nSetup your faction now.\n\n");
+                }
+                else {
+                    // Notify player of successful Faction selection
+                    System.out.print("\nCongratulations, you successfully selected the "+pList[i].getPlaying().getNickname()
+                            +"\nSetup your faction now.\n\n");
+                }
             }
 
             System.out.print("\nIn Summary, the turn order is as follows: ");
             for (int i = pList.length-1; i >= 0; i--) {
                 System.out.print("\n"+pList[i].getPlayerName()+" as the "+pList[i].getPlaying().getNickname());
             }
+
+            System.out.print("\n\nPress any key to return to the menu.");
+            char cInput = '}';
+            do {
+                cInput = scan.next().trim().charAt(0);
+            } while (cInput == '}');
         }
         return new Game(expansions,players.getNoPlayers(),pList);
     }
@@ -201,16 +221,45 @@ public class Main {
                 , new Faction(false,3,"Corvid Conspiracy","crows",2)
                 , new Faction(false,5,"Riverfolk Company","otters",1)
                 , new Faction(false,3,"Woodland Alliance","alliance",0)
-                , new Faction(false,5,"Vagabond","vagabond",0)
-                , new Faction(false,5,"Vagabond","vagabond",1)
+                , new Faction(false,5,"Vagabond","vagabond",0, true)
+                , new Faction(false,5,"Vagabond","vagabond",1, true)
                 , new Faction(true,8,"Lord of the Hundreds","rats",3)
                 , new Faction(true,8,"Keepers in Iron","badgers",3)
         };
         return result;
     }
 
+    public static Vagabond[] createVagabondList(Configuration expansions) {
+        int totalOptions = 3;
+        if (expansions.isRiverfolk()) totalOptions += 3;
+        if (expansions.isVagabond()) totalOptions += 3;
+        Vagabond[] result = new Vagabond[totalOptions];
+        Vagabond[] pool = new Vagabond[]{
+                new Vagabond("Thief")
+                , new Vagabond("Tinker")
+                , new Vagabond("Ranger")
+                , new Vagabond(true,false,"Scoundrel")
+                , new Vagabond(true,false,"Vagrant")
+                , new Vagabond(true,false,"Arbiter")
+                , new Vagabond(false,true,"Ronin")
+                , new Vagabond(false,true,"Harrier")
+                , new Vagabond(false,true,"Adventurer")
+        };
+        int j = 0;
+        for (int i = 0; i < pool.length; i++) {
+            if ((!pool[i].isRf() && !pool[i].isVb())
+            || (pool[i].isRf() && expansions.isRiverfolk())
+            || (pool[i].isVb() && expansions.isVagabond())
+            ) {
+                result[j] = pool[i];
+                j++;
+            }
+        }
+        return result;
+    }
+
     // Trim Factions
-    public static Faction[] trimByExpansion(Faction[] fList, boolean rf, boolean uw, boolean ma) {
+    public static Faction[] trimByExpansion(Faction[] fList, boolean rf, boolean uw, boolean ma, boolean vb) {
         int total = 4;
         if (rf) total += 3;
         if (uw) total += 2;
