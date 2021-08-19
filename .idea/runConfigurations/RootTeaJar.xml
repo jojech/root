@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RootTeaJar" type="JarApplication">
+    <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Basic_jar/Basic.jar" />
+    <option name="WORKING_DIRECTORY" value="C:\Users\jjcjs\IdeaProjects\Basic" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="Basic:jar" />
+      </option>
+    </method>
+  </configuration>
+</component>
