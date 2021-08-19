@@ -55,7 +55,7 @@ public class Main {
         else {
             // System.out.print("ADS Pool: ");
             ArrayList<Faction> factionDraft = new ArrayList<>();
-            Faction[] ads = createADSetPool(players.getNoPlayers(), list);
+            Faction[] ads = createADSetPool(players.getNoPlayers(), list, players.getNoPlayers() == list.length);
             for (Faction z : ads) {
                 // System.out.print("\n"+z.getFactionName()+" - "+z.getReach());
                 factionDraft.add(z);
@@ -97,8 +97,9 @@ public class Main {
 
     // Method returns a list of random factions based on the player count
     // Purpose: to create a unique game experience every time players sit at the table.
-    public static Faction[] createADSetPool(int noPlayers, Faction[] List) {
-        Faction[] result = new Faction[noPlayers + 1];
+    public static Faction[] createADSetPool(int noPlayers, Faction[] List, boolean fulltable) {
+        if (!fulltable) noPlayers += 1;
+        Faction[] result = new Faction[noPlayers];
         ArrayList<Faction> list = new ArrayList<>();
         for (Faction x : List) list.add(x);
         int random = randomRedIndex(List);
