@@ -53,7 +53,7 @@ public class Main {
         Player[] pList = players.getPlayers();
         if (players.getNoPlayers() > list.length) System.out.print("Not enough factions...");
         else {
-            System.out.print("ADS Pool: ");
+            // System.out.print("ADS Pool: ");
             ArrayList<Faction> factionDraft = new ArrayList<>();
             Faction[] ads = createADSetPool(players.getNoPlayers(), list);
             for (Faction z : ads) {
