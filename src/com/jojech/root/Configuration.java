@@ -53,4 +53,14 @@ public class Configuration {
     public void setVagabond(boolean vagabond) {
         this.vagabond = vagabond;
     }
+
+    @Override
+    public String toString() {
+        return "Configuration{" +
+                "riverfolk=" + riverfolk +
+                ", underworld=" + underworld +
+                ", marauders=" + marauders +
+                ", vagabond=" + vagabond +
+                '}';
+    }
 }

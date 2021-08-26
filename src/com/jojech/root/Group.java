@@ -1,5 +1,7 @@
 package com.jojech.root;
 
+import java.util.Arrays;
+
 public class Group {
     private int noPlayers;
     private Player[] players;
@@ -27,5 +29,12 @@ public class Group {
 
     public void setPlayers(Player[] players) {
         this.players = players;
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "players=" + Arrays.toString(players) +
+                '}';
     }
 }

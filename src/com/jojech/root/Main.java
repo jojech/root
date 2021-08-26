@@ -25,15 +25,16 @@ public class Main {
         do {
             // Put interface within these brackets
             // Initiate interface
-            System.out.println("\n================ Menu ================" +
+            System.out.println(
+                    "\n================ Menu ================" +
                     "\nSelect an option from the list below:" +
-                    "\nDraft factions using ADSet rules (d)" +
-                    "\nChange Expansion settings (e)" +
-                    "\nChange Player List (p)" +
+                    "\nSetup Game (g)" +
+                    "\nExpansion settings (e)" +
+                    "\nPlayer Menu (p)" +
                     "\nExit (x)");
             cInput = scan.next().trim().toLowerCase().charAt(0);
             switch (cInput) {
-                case 'd' -> settings = adSetDraftFactions(expansions,players);
+                case 'g' -> settings = adSetDraftFactions(expansions,players);
                 case 'e' -> expansions = updateExpansions();
                 case 'p' -> players = updatePlayers();
                 case 'x' -> System.out.print("Thank you for playing! ");
@@ -41,6 +42,12 @@ public class Main {
             }
         } while (cInput != 'x');
         System.out.println("Exiting the program...");
+    }
+
+    // This method handles the expansions menu
+    public static Configuration expansionsMenu(Configuration expansions) {
+        expansions.toString();
+        return expansions;
     }
 
     // This method handles the drafting of factions for players to set up a game
